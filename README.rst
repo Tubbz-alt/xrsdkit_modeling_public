@@ -1,12 +1,8 @@
-Flow Reactor Modeling
----------------------
+xrsdkit Modeling
+----------------
 
-This repository is for curating scattering patterns and xrsdkit analysis results
-for colloidal nanoparticle samples from the flow reactor at beam line 1-5.
-
+This repository is for curating scattering patterns and xrsdkit analysis results.
 Usage instructions are below.
-For a Python notebook that walks through this process,
-see the usage_notebook.ipynb.
 
 
 Disclaimer
@@ -43,6 +39,7 @@ Activate your virtual environment (presume that you created one and named it flo
 and move into the directory you just downloaded.
 
     workon flowreactor
+
     cd flowreactor_modeling
 
 If you plan to use the models as-distributed in this repository,
@@ -119,6 +116,7 @@ and a pickle file that can be used to rebuild the model itself.
 You can load these models into an xrsdkit module at runtime.
 
     import xrsdkit 
+
     xrsdkit.load_models('path/to/modeling/data/dir')
 
 After executing these lines, the models defined in modeling_data
@@ -126,9 +124,14 @@ will be used for the duration of the runtime,
 whenever xrsdkit.predict is called.
 
     import numpy as np
+
     q_I = np.loadtxt('path/to/1d/scattering/pattern.dat')
+
     feats = xrsdkit.profile_1d_pattern(q_I[:,0],q_I[:,1])
+
     preds = xrsdkit.predict(feats)
+
     xsys = xrsdkit.build_system_from_predictions(preds) 
+
     xfig = xrsdkit.plot_xrsd_fit(xsys,q_I[:,0],q_I[:,1])
 
